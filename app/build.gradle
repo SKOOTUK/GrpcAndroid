@@ -62,16 +62,13 @@ dependencies {
     implementation 'io.grpc:grpc-okhttp:1.32.1'
     implementation 'io.grpc:grpc-protobuf-lite:1.32.1'
     implementation 'io.grpc:grpc-stub:1.32.1'
-    implementation 'org.apache.tomcat:annotations-api:6.0.53'
-    implementation 'com.google.android.material:material:1.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'//todo is this needed?
+    implementation 'org.apache.tomcat:annotations-api:6.0.53' //todo is this needed?
+
 
 }
 
 tasks.withType(GenerateModuleMetadata) {
-    // Module metadata, introduced in Gradle 6.0, conflicts with our publishing task for
-    // grpc-alts and grpc-compiler.
+    // Module metadata, introduced in Gradle 6.0, conflicts with our publishing task for grpc-alts and grpc-compiler.
     enabled = false
 }
 
@@ -84,14 +81,5 @@ ext {
 //            it.options.errorprone.excludedPaths = ".*/src/generated/[^/]+/java/.*" +
 //                    "|.*/build/generated/source/proto/[^/]+/java/.*"
         }
-    }
-
-}
-
-configurations {
-    // Detect Maven Enforcer's dependencyConvergence failures. We only
-    // care for artifacts used as libraries by others.
-    releaseRuntimeClasspath {
-//        resolutionStrategy.failOnVersionConflict()
     }
 }
