@@ -9,3 +9,8 @@ Port and host are already prefilled in the app and hopefully shoud point exactly
 ## Where is ze server?:
 
 https://github.com/Aetherna/GrpcAndroidServer
+
+## Changelog
+
+- Simple request/ response scenario in SendRequestActivity
+- Client streaming scenario in ClientStreamActivity - needs server side done 
