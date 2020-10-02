@@ -1,5 +1,5 @@
 # GrpcAndroid
-Standalone example based on Grpc.io example
+Standalone example based on Grpc.io example and Salesforce RxGrpc sample.
 
 ## How to run
 
@@ -13,4 +13,4 @@ https://github.com/Aetherna/GrpcAndroidServer
 ## Changelog
 
 - Simple request/ response scenario in SendRequestActivity
-- Client streaming scenario in ClientStreamActivity - needs server side done 
+- Server streaming using rxjava scenario in ClientStreamActivity  
