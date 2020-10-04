@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.zelbess.tripupdates";
+option java_outer_classname = "TripServiceProto";
+option objc_class_prefix = "HLW";
+
+package trips;
+
+service TripService {
+
+  rpc createTrip (CreateTripRequest) returns (CreateTripReply) {}
+  rpc followTrip (FollowTripRequest) returns (stream FollowTripReply) {}
+}
+
+message CreateTripRequest {}
+
+message CreateTripReply {
+  int32 id = 1;
+}
+
+message FollowTripRequest {
+  int32 id = 1;
+}
+
+message FollowTripReply {
+  Trip trip = 1;
+}
+
+message Trip {
+  int32 id = 1;
+  string message = 2;
+}

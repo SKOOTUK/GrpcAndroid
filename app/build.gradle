@@ -39,12 +39,15 @@ android {
     }
 }
 
+def reactiveGrpcVersion = "1.0.1"
+def grpcVersion = '1.32.1'
+
 protobuf {
     protoc { artifact = 'com.google.protobuf:protoc:3.8.0' }
     plugins {
-        grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.32.1' }
-        rxgrpc { artifact = "com.salesforce.servicelibs:rxgrpc:1.0.1" }
-        reactor { artifact = "com.salesforce.servicelibs:reactor-grpc:1.0.1" }
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}" }
+        rxgrpc { artifact = "com.salesforce.servicelibs:rxgrpc:${reactiveGrpcVersion}" }
+        reactor { artifact = "com.salesforce.servicelibs:reactor-grpc:${reactiveGrpcVersion}" }
     }
     clean {
         delete protobuf.generatedFilesBaseDir
@@ -65,8 +68,6 @@ protobuf {
     }
 }
 
-def reactiveGrpcVersion = "1.0.1"
-
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
@@ -77,16 +78,15 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0" //outdated rxjava2 needed by grpc :/
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation "com.salesforce.servicelibs:reactive-grpc:1.0.1"
+    implementation "com.salesforce.servicelibs:reactive-grpc:${reactiveGrpcVersion}"
     implementation "com.salesforce.servicelibs:rxgrpc-stub:${reactiveGrpcVersion}"
     implementation "com.salesforce.servicelibs:reactor-grpc-stub:${reactiveGrpcVersion}"
 
 
     implementation 'com.google.protobuf:protobuf-javalite:3.12.0'
-    implementation 'io.grpc:grpc-okhttp:1.32.1'
-    implementation 'io.grpc:grpc-protobuf-lite:1.32.1'
-    implementation 'io.grpc:grpc-stub:1.32.1'
-//    implementation 'org.apache.tomcat:annotations-api:6.0.53' //todo is this needed?
+    implementation "io.grpc:grpc-okhttp:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf-lite:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
 
 }
 
@@ -99,10 +99,4 @@ ext {
     protocPluginBaseName = 'protoc-gen-grpc-java'
     javaPluginPath = "$rootDir/compiler/build/exe/java_plugin/$protocPluginBaseName"
 
-    configureProtoCompilation = {
-        tasks.withType(JavaCompile) {
-//            it.options.errorprone.excludedPaths = ".*/src/generated/[^/]+/java/.*" +
-//                    "|.*/build/generated/source/proto/[^/]+/java/.*"
-        }
-    }
 }
