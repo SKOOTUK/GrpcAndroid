@@ -35,13 +35,17 @@ class StreamActivity : AppCompatActivity() {
         }
 
         unfollow.setOnClickListener {
-            disposables.dispose()
+            disposables.clear()
             followedTripUpdates.text = ""
         }
     }
 
     private fun setupService(): RxTripServiceGrpc.RxTripServiceStub {
-        channel = ManagedChannelBuilder.forAddress(SERVER_HOST_EMULATOR, SERVER_PORT).usePlaintext().build()
+        channel = ManagedChannelBuilder
+            .forAddress(SERVER_HOST_EMULATOR, SERVER_PORT)
+            .usePlaintext()
+            .keepAliveWithoutCalls(true)
+            .build()
         return RxTripServiceGrpc.newRxStub(channel)
     }
 
@@ -70,8 +74,8 @@ class StreamActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        channel.shutdown()
         disposables.clear()
+        channel.shutdown()
         super.onDestroy()
     }
 }
