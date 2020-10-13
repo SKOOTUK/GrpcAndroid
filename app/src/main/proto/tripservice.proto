@@ -11,10 +11,10 @@ service TripService {
 
   rpc createTrip (CreateTripRequest) returns (CreateTripReply) {}
   rpc followTrip (FollowTripRequest) returns (stream FollowTripReply) {}
+  rpc updateLocation(stream UpdateLocationRequest) returns (stream UpdateLocationReply) {}
 }
 
 message CreateTripRequest {}
-
 message CreateTripReply {
   int32 id = 1;
 }
@@ -22,12 +22,19 @@ message CreateTripReply {
 message FollowTripRequest {
   int32 id = 1;
 }
-
 message FollowTripReply {
   Trip trip = 1;
 }
-
 message Trip {
   int32 id = 1;
   string message = 2;
+}
+
+message UpdateLocationRequest {
+  string userId = 1;
+  double lat = 2;
+  double lon = 3;
+}
+message UpdateLocationReply {
+  int32 statusCode = 1;
 }
