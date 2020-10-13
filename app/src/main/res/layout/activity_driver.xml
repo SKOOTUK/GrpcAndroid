@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".driver.DriverActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="DRIVER SCREEN"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/createTrip"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="CREATE TRIP"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tripInviteStateLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Passenger invite status:"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/createTrip" />
+
+    <TextView
+        android:id="@+id/tripInviteState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pending:"
+        app:layout_constraintTop_toBottomOf="@id/tripInviteStateLabel" />
+
+    <TextView
+        android:id="@+id/tripStateLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Trip Status:"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tripInviteState" />
+
+    <TextView
+        android:id="@+id/tripState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Planned"
+        app:layout_constraintTop_toBottomOf="@id/tripStateLabel" />
+
+    <TextView
+        android:id="@+id/tripUpdatesLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Trip Newest Update"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tripState" />
+
+    <TextView
+        android:id="@+id/tripUpdates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="eta: 100"
+        app:layout_constraintTop_toBottomOf="@id/tripUpdatesLabel" />
+
+    <Button
+        android:id="@+id/cancelTrip"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@color/colorCancel"
+        android:text="CANCEL TRIP"
+        app:layout_constraintTop_toBottomOf="@id/tripUpdates" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/tripView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tripInviteState,tripInviteStateLabel,tripState,tripStateLabel,tripUpdates,tripUpdatesLabel,cancelTrip" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

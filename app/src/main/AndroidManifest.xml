@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StreamActivity"></activity>
+        <activity android:name=".driver.DriverActivity"></activity>
+        <activity android:name=".StreamActivity" />
         <activity
             android:name=".SendRequestActivity"
             android:label="@string/title_activity_send"
@@ -26,7 +27,7 @@
         </activity>
 
         <service
-            android:name=".background.LocationService"
+            android:name=".background.GrpcService"
             android:label="LocationService" />
     </application>
 

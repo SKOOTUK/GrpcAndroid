@@ -7,19 +7,23 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/sendRequest"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="@color/colorPrimary"
+        android:id="@+id/driver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="SIMPLE REQUEST RESPONSE"
+        android:layout_marginTop="100dp"
+        android:text="DRIVER SCREEN"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/clientStream"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="@color/colorAccent"
+        android:id="@+id/passenger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="CLIENT STREAM"
-        app:layout_constraintTop_toBottomOf="@id/sendRequest" />
+        android:layout_marginTop="60dp"
+        android:text="PASSENGER SCREEN"
+        app:layout_constraintTop_toBottomOf="@id/driver" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

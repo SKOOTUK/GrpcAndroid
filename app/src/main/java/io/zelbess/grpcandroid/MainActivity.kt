@@ -3,7 +3,8 @@ package io.zelbess.grpcandroid
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.zelbess.grpcandroid.background.LocationService
+import io.zelbess.grpcandroid.background.GrpcService
+import io.zelbess.grpcandroid.driver.DriverActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,13 +12,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        startService(Intent(this, LocationService::class.java))
+        startService(Intent(this, GrpcService::class.java))
 
-        sendRequest.setOnClickListener {
-            startActivity(Intent(this, SendRequestActivity::class.java))
+        driver.setOnClickListener {
+            startActivity(Intent(this, DriverActivity::class.java))
         }
 
-        clientStream.setOnClickListener {
+        passenger.setOnClickListener {
             startActivity(Intent(this, StreamActivity::class.java))
         }
     }
