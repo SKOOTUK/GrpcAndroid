@@ -25,14 +25,21 @@ class GrpcService : Service() {
 
     private fun startSendingLocation() {
         grpcModel.updateUserLocation()
-            .doOnError { Log.e("WHAT", "WHAT") }
-            .subscribe()
+            .subscribe(
+                {},
+                {
+                    Log.e("SERVICE START", it.localizedMessage)
+                })
             .let { disposable.add(it) }
     }
 
     fun followTrip(userId: Int, tripId: Int) {
         grpcModel.followTrip(userId, tripId)
-            .subscribe()
+            .subscribe(
+                {},
+                {
+                    Log.e("SERVICE FOLLOW", it.localizedMessage)
+                })
             .let { disposable.add(it) }
     }
 

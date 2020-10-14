@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import io.zelbess.grpcandroid.R
 import io.zelbess.grpcandroid.background.GrpcService
@@ -42,6 +43,10 @@ class DriverActivity : AppCompatActivity() {
             when (it) {
                 is UiState.TripCreated -> {
                     locationService?.followTrip(it.driverId, it.tripId)
+                    tripView.isVisible = true
+                }
+                is UiState.TripUpdate -> {
+                    tripUpdates.text = it.message
                 }
                 is UiState.ShowError -> {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
