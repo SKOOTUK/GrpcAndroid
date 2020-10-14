@@ -30,11 +30,12 @@ message FollowTripReply {
 }
 message TripNetworkModel {
   int32 id = 1;
-  string message = 2;
+  int32 eta = 2;
+  string type = 3;
 }
 
 message UpdateLocationRequest {
-  string userId = 1;
+  int32 userId = 1;
   double lat = 2;
   double lon = 3;
 }

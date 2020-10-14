@@ -2,6 +2,7 @@ package io.zelbess.grpcandroid.driver
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.grpc.ManagedChannel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.zelbess.grpcandroid.storage.Storage
@@ -11,9 +12,12 @@ import io.zelbess.tripupdates.RxTripServiceGrpc
 const val DRIVER_ID = 111
 
 class DriverViewModel(
-    private val tripService: RxTripServiceGrpc.RxTripServiceStub,
+    private val managedChannel: ManagedChannel,
     private val storage: Storage
 ) : ViewModel() {
+    private val tripService: RxTripServiceGrpc.RxTripServiceStub by lazy {
+        RxTripServiceGrpc.newRxStub(managedChannel)
+    }
 
     val viewState = MutableLiveData<UiState>()
     private val disposable = CompositeDisposable()
@@ -42,16 +46,17 @@ class DriverViewModel(
         storage.followTrip(id)
             .subscribe(
                 {
-                    viewState.postValue(UiState.TripUpdate(it.id, it.message))
+                    viewState.postValue(UiState.TripUpdate(it.id, "${it.type} ${it.eta}"))
                 },
                 {
-                    viewState.postValue(UiState.ShowError(it.localizedMessage?: "Uj"))
+                    viewState.postValue(UiState.ShowError(it.localizedMessage ?: "Uj"))
                 }
             ).let { disposable.add(it) }
     }
 
     override fun onCleared() {
         disposable.clear()
+        managedChannel.shutdown()
         super.onCleared()
     }
 

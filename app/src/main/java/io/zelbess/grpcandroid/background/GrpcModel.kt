@@ -1,8 +1,9 @@
 package io.zelbess.grpcandroid.background
 
+import io.grpc.ManagedChannel
 import io.reactivex.Flowable
-import io.realm.Realm
-import io.zelbess.grpcandroid.domain.Trip
+import io.zelbess.grpcandroid.domain.JourneyEvent
+import io.zelbess.grpcandroid.driver.DRIVER_ID
 import io.zelbess.grpcandroid.storage.Storage
 import io.zelbess.tripupdates.FollowTripRequest
 import io.zelbess.tripupdates.RxTripServiceGrpc
@@ -13,20 +14,25 @@ import kotlin.random.Random
 
 interface GrpcModel {
     fun updateUserLocation(): Flowable<UpdateLocationReply>
-    fun followTrip(userId: Int, tripId: Int): Flowable<Trip>
+    fun followTrip(userId: Int, tripId: Int): Flowable<JourneyEvent>
+    fun closeChannel()
 }
 
 class GrpcModelImpl(
-    private val tripService: RxTripServiceGrpc.RxTripServiceStub,
+    private val managedChannel: ManagedChannel,
     private val storage: Storage
 ) : GrpcModel {
 
+    private val tripService: RxTripServiceGrpc.RxTripServiceStub by lazy {
+        RxTripServiceGrpc.newRxStub(managedChannel)
+    }
 
     override fun updateUserLocation(): Flowable<UpdateLocationReply> {
+
         val updates = Flowable.interval(2, TimeUnit.SECONDS)
             .map {
                 UpdateLocationRequest.newBuilder()
-                    .setUserId("123")
+                    .setUserId(DRIVER_ID)
                     .setLat(Random.nextDouble(100.0))
                     .setLon(Random.nextDouble(100.0))
                     .build()
@@ -35,10 +41,14 @@ class GrpcModelImpl(
         return tripService.updateLocation(updates)
     }
 
-    override fun followTrip(userId: Int, tripId: Int): Flowable<Trip> {
+    override fun followTrip(userId: Int, tripId: Int): Flowable<JourneyEvent> {
         return tripService
             .followTrip(FollowTripRequest.newBuilder().setId(tripId).build())
-            .map { it.trip.let { Trip(it.id, it.message) } }
+            .map { it.trip.let { JourneyEvent(it.id, it.type, it.eta) } }
             .doOnNext { storage.saveTrip(it) }
+    }
+
+    override fun closeChannel() {
+        managedChannel.shutdown()
     }
 }

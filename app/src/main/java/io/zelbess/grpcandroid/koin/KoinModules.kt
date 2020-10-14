@@ -29,6 +29,5 @@ val grpcModule = module {
             .keepAliveWithoutCalls(true)
             .maxRetryAttempts(5)
             .build()
-            .let { RxTripServiceGrpc.newRxStub(it) }
     }
 }

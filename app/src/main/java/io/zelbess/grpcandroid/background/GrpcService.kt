@@ -51,6 +51,7 @@ class GrpcService : Service() {
 
     override fun stopService(name: Intent?): Boolean {
         disposable.clear()
+        grpcModel.closeChannel()
         return super.stopService(name)
     }
 }

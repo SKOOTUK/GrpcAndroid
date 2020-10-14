@@ -66,7 +66,7 @@ class StreamActivity : AppCompatActivity() {
             .map { it.trip }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { followedTripUpdates.text = "Request no: ${it.id} message: ${it.message}" },
+                { followedTripUpdates.text = "Request no: ${it.id} type: ${it.type} eta: ${it.eta}" },
                 { followedTripUpdates.text = ("Error! ${it.message}") },
                 { followedTripUpdates.text = "Completed" }
             )
