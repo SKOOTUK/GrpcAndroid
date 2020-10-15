@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="START APPLICATION AS:"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        />
+
     <Button
         style="@style/Widget.AppCompat.Button.Colored"
         android:background="@color/colorPrimary"
         android:id="@+id/driver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="120dp"
         android:text="DRIVER SCREEN"
         app:layout_constraintTop_toTopOf="parent" />
 

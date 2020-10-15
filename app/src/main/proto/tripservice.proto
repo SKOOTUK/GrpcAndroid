@@ -1,4 +1,6 @@
 syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 option java_multiple_files = true;
 option java_package = "io.zelbess.tripupdates";
@@ -35,9 +37,11 @@ message TripNetworkModel {
 }
 
 message UpdateLocationRequest {
-  int32 userId = 1;
-  double lat = 2;
-  double lon = 3;
+  int32 user_id = 1; // this is identifier as the phone knows it
+  float latitude = 2; // this should be precise float of the latitude
+  float longitude = 3; // this should be a precise float of the longitude
+  google.protobuf.Timestamp time = 4; // client time when the location as ascertained
+
 }
 message UpdateLocationReply {
   int32 statusCode = 1;

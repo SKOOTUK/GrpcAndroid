@@ -1,4 +1,4 @@
-package io.zelbess.grpcandroid.driver
+package io.zelbess.grpcandroid.ui.driver
 
 import android.content.ComponentName
 import android.content.Context
@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import io.zelbess.grpcandroid.R
-import io.zelbess.grpcandroid.background.GrpcService
-import io.zelbess.grpcandroid.driver.DriverViewModel.UiState
+import io.zelbess.grpcandroid.service.GrpcService
+import io.zelbess.grpcandroid.ui.driver.DriverViewModel.UiState
 import kotlinx.android.synthetic.main.activity_driver.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

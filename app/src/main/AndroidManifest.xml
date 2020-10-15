@@ -12,12 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".driver.DriverActivity"></activity>
-        <activity android:name=".StreamActivity" />
         <activity
-            android:name=".SendRequestActivity"
-            android:label="@string/title_activity_send"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ui.home.HomeActivity"
+            android:label="Home Activity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.driver.DriverActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +26,7 @@
         </activity>
 
         <service
-            android:name=".background.GrpcService"
+            android:name=".service.GrpcService"
             android:label="LocationService" />
     </application>
 

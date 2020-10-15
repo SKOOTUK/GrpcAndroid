@@ -1,15 +1,15 @@
-package io.zelbess.grpcandroid.driver
+package io.zelbess.grpcandroid.ui.driver
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.grpc.ManagedChannel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import io.zelbess.grpcandroid.config.DRIVER_ID
 import io.zelbess.grpcandroid.storage.Storage
 import io.zelbess.tripupdates.CreateTripRequest
 import io.zelbess.tripupdates.RxTripServiceGrpc
 
-const val DRIVER_ID = 111
 
 class DriverViewModel(
     private val managedChannel: ManagedChannel,
@@ -35,18 +35,18 @@ class DriverViewModel(
             }
             .subscribe(
                 {
-                    followTripUpdatesFromRealm(it.id)
+                    followJourneyUpdates(it.id)
                 }
                 , {
                     viewState.postValue(UiState.ShowError(it.localizedMessage ?: "Oj"))
                 }).let { disposable.add(it) }
     }
 
-    private fun followTripUpdatesFromRealm(id: Int) {
-        storage.followTrip(id)
+    private fun followJourneyUpdates(id: Int) {
+        storage.getJourneyUpdates(id)
             .subscribe(
                 {
-                    viewState.postValue(UiState.TripUpdate(it.id, "${it.type} ${it.eta}"))
+                    viewState.postValue(UiState.TripUpdate(it.journeyId, "ETA: ${it.eta}"))
                 },
                 {
                     viewState.postValue(UiState.ShowError(it.localizedMessage ?: "Uj"))

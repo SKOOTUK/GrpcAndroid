@@ -1,4 +1,4 @@
-package io.zelbess.grpcandroid.background
+package io.zelbess.grpcandroid.service
 
 import android.app.Service
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.util.Log
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 
+const val USER_ID_KEY = "USER_ID"
+
 class GrpcService : Service() {
 
     private val grpcModel: GrpcModel by inject()
@@ -15,7 +17,12 @@ class GrpcService : Service() {
     private val binder = GrpcServiceBinder()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        startSendingLocation()
+        intent?.let {
+            val userId = it.getIntExtra(USER_ID_KEY, -1)
+            if(userId != -1){
+                startSendingLocation(userId)
+            }
+        }
         return START_NOT_STICKY;
     }
 
@@ -23,8 +30,8 @@ class GrpcService : Service() {
         return binder
     }
 
-    private fun startSendingLocation() {
-        grpcModel.updateUserLocation()
+    private fun startSendingLocation(userId: Int) {
+        grpcModel.updateUserLocation(userId)
             .subscribe(
                 {},
                 {

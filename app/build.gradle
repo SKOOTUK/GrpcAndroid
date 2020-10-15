@@ -77,11 +77,16 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
 
     def koin_version='2.2.0-rc-2'
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-viewmodel:$koin_version"
+
+    implementation 'net.danlew:android.joda:2.10.6.2'
 
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0" //outdated rxjava2 needed by grpc :/
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
